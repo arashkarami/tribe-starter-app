@@ -17,4 +17,5 @@ export const {
   ORIGIN,
   DISCORD_BOT_TOKEN,
   DISCORD_CHANNEL_ID,
+  REDIS_CONNECTION
 } = process.env;
