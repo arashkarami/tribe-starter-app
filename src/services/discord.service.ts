@@ -5,11 +5,11 @@ class DiscordService {
   private client: Client = null;
 
   constructor() {
-    this.genrateClientInstance();
+    this.generateClientInstance();
     this.connect();
   }
 
-  private genrateClientInstance() {
+  private generateClientInstance() {
     if (this.client === null) this.client = new Client({ intents: [Intents.FLAGS.GUILDS] });
   }
 

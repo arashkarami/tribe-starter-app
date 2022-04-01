@@ -1,35 +1,33 @@
-import { Client, Intents, TextChannel } from 'discord.js';
+import { createClient } from 'redis';
 import { REDIS_CONNECTION } from '@config';
 import { logger } from '@utils/logger';
 
 class UserService {
-  
-    constructor() {
-        this.genrateClientInstance();
-        this.connect();
-    }
-    
-    private genrateClientInstance() {
-        //if (this.client === null) this.client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-    }
-    
-    private connect() {
-        // this.client.on('ready', () => {
-        //   console.log(`Discord_bot has been active!`);
-        // });
-    
-        // this.client.login(REDIS_CONNECTION);
-    }
+  private client: any;
+  private USER_COUNT = 'total';
+  constructor() {
+    (async () => {
+      await this.generateInstance();
+    })();
+  }
 
-    public async increase(){
-        try {
-            //++
-            return 2;
-        } catch (error) {
-            logger.error(error);
-            throw new error;
-        } 
+  private async generateInstance() {
+    this.client = createClient({ url: REDIS_CONNECTION });
+
+    // this.client.on('error', (err) => console.log('Redis Client Error', err));
+    // await this.client.connect();
+  }
+
+  public async increment() {
+    try {
+      return 1005;
+      //    await this.client.icnr(this.USER_COUNT);
+      //    return this.client.get(this.USER_COUNT);
+    } catch (error) {
+      logger.error(error);
+      throw new error();
     }
+  }
 }
 
 export default UserService;
