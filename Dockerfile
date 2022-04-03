@@ -9,7 +9,7 @@ COPY . .
 
 RUN yarn build
 
-FROM node:16.14.2-alpine AS Runner
+FROM node:16.14.2-alpine
 WORKDIR /tribe/app
 
 ENV NODE_ENV production
@@ -23,6 +23,7 @@ RUN chown -R tribe:nodejs /tribe/app
 COPY --from=Builder /tribe/app/node_modules /tribe/app/node_modules
 COPY --from=Builder /tribe/app/dist /tribe/app/dist
 COPY --from=Builder /tribe/app/package.json /tribe/app
+COPY .env /tribe/app
 RUN ls -lah /tribe/app
 
 EXPOSE 3000
