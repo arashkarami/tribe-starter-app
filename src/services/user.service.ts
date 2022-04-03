@@ -14,18 +14,16 @@ class UserService {
   private async generateInstance() {
     this.client = createClient({ url: REDIS_CONNECTION });
 
-    // this.client.on('error', (err) => console.log('Redis Client Error', err));
-    // await this.client.connect();
+    this.client.on('error', (err) => logger.error("Redis connection failed",err));
+    await this.client.connect();
   }
 
   public async increment() {
     try {
-      return 1005;
-      //    await this.client.icnr(this.USER_COUNT);
-      //    return this.client.get(this.USER_COUNT);
+      await this.client.incr(this.USER_COUNT);
+      return this.client.get(this.USER_COUNT);
     } catch (error) {
       logger.error(error);
-      throw new error();
     }
   }
 }
