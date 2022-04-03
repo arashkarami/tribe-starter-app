@@ -15,7 +15,7 @@ class IndexController {
           },
         });
       } else {
-        const memberInfo = await this.clientService.getMemberByID(req.body.data.object.ownerId);
+        const memberInfo = await this.clientService.getMemberByID(req.body.data.object.id);
         res.json(memberInfo);
       }
     } catch (error) {

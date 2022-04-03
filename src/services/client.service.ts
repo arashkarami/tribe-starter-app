@@ -36,9 +36,10 @@ class ClientService {
         networkId: NETWORK_ID,
         memberId: MEMBER_ID,
       });
+
     } catch (error) {
       logger.error(error);
-      throw new HttpException(500, 'Can not genrate Tribe Access token');
+      throw new HttpException(500, 'Can not generate Tribe Access token');
     }
   }
 
@@ -47,7 +48,7 @@ class ClientService {
       //TODO get custom fields not all!
       const userInfo = await this.tribeClient.members.get(id, 'all', this.accessToken);
 
-      //TODO why url removed from userInfo.
+      //TODO why 'url' removed from userInfo.
       if (userInfo != null) {
         const totalUserCount = await this.userService.increment();
 
