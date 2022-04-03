@@ -14,7 +14,7 @@ class UserService {
   private async generateInstance() {
     this.client = createClient({ url: REDIS_CONNECTION });
 
-    this.client.on('error', (err) => logger.error("Redis connection failed",err));
+    this.client.on('error', err => logger.error('Redis connection failed', err));
     await this.client.connect();
   }
 
