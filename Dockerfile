@@ -23,6 +23,7 @@ RUN chown -R tribe:nodejs /tribe/app
 COPY --from=Builder /tribe/app/node_modules /tribe/app/node_modules
 COPY --from=Builder /tribe/app/dist /tribe/app/dist
 COPY --from=Builder /tribe/app/package.json /tribe/app
+RUN ls -lah /tribe/app
 
 EXPOSE 3000
 
